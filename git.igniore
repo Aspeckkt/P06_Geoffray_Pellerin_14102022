@@ -1,0 +1,4 @@
+backend/nodes-modules
+frontend/nodes-modules
+backend/.env
+backend/images
