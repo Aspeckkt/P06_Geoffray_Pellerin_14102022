@@ -1,7 +1,7 @@
-const Sauce = require('../models/sauces');
-const fs = require('fs');
+const Sauce = require('../models/sauces'); // Recupèrer depuis l'api les sauces crées
+const fs = require('fs'); // CRUD
 
-exports.createSauce = (req, res, next) => {
+exports.createSauce = (req, res, next) => { // Créer une sauce
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   delete sauceObject._userId;
@@ -16,7 +16,7 @@ exports.createSauce = (req, res, next) => {
     .catch(error => { res.status(400).json({ error }) })
 };
 
-exports.getOneSauce = (req, res, next) => {
+exports.getOneSauce = (req, res, next) => { // Récupèrer une sauce
   Sauce.findOne({
     _id: req.params.id
   }).then(
@@ -32,7 +32,7 @@ exports.getOneSauce = (req, res, next) => {
   );
 };
 
-exports.modifySauce = (req, res, next) => {
+exports.modifySauce = (req, res, next) => { // Modification de sauce
   const sauceObject = req.file ? {
     ...JSON.parse(req.body.sauce),
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -54,7 +54,7 @@ exports.modifySauce = (req, res, next) => {
     });
 };
 
-exports.deleteSauce = (req, res, next) => {
+exports.deleteSauce = (req, res, next) => { //Suppresion de sauce
   Sauce.findOne({ _id: req.params.id })
     .then(sauce => {
       if (sauce.userId != req.auth.userId) {
@@ -75,17 +75,17 @@ exports.deleteSauce = (req, res, next) => {
 
 exports.likeSauce = (req, res, next) => {
   const like = req.body.like;
-  if (like === 1) { // option j'aime
+  if (like === 1) { // Option j'aime
     Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: 1 }, $push: { usersLiked: req.body.userId }, _id: req.params.id })
       .then(() => res.status(200).json({ message: 'You like this sauce' }))
 
       .catch(error => res.status(400).json({ error }))
-  } else if (like === -1) { // option j'aime pas
+  } else if (like === -1) { // Option j'aime pas
     Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: req.body.userId }, _id: req.params.id })
       .then(() => res.status(200).json({ message: 'You don\'t like this sauce' }))
       .catch(error => res.status(400).json({ error }))
 
-  } else {    //option annulation du j'aime ou / j'aime pas
+  } else {    // Option annulation du j'aime ou / j'aime pas
     Sauce.findOne({ _id: req.params.id })
       .then(sauce => {
         if (sauce.usersLiked.indexOf(req.body.userId) !== -1) {
@@ -103,7 +103,7 @@ exports.likeSauce = (req, res, next) => {
   }
 };
 
-exports.getAllSauce = (req, res, next) => {
+exports.getAllSauce = (req, res, next) => { // Récupèration des sauces
   Sauce.find().then(
     (sauces) => {
       res.status(200).json(sauces);

@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const validator = require('email-validator');
-const User = require('../models/user')
+const bcrypt = require('bcrypt'); // Plugin permetant de Hasher le mot de passe des utilisateurs afin que même l'administrateur ne puissent pas les connaitres
+const jwt = require('jsonwebtoken'); // Génère à la création d'un compte utilisateur un token Hasher et unique pour chaque utilisateur
+const validator = require('email-validator'); // pourrait être remplacer pars des RegEx oblige un utilisateur d'utiliser un mail valide
+const User = require('../models/user') // Renvois apres l'inscription les information des utilisateurs vers notre base de données
 
 exports.signup = (req, res, next) => {
     if (!validator.validate(req.body.email)) return res.status(403).json({ message: 'Le format de l\'adresse mail est incorrect.' })
