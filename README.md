@@ -22,9 +22,6 @@ Une fois le projet installer, rendez-vous sur http://localhost:4200/
 ````text
 # MongoDB credentials
 mongoose.connect(process.env.'mongodb+srv://USER:PSW@HOST/ <dbname >?retryWrites=true & w=majority' // Remplacer ou utiliser la variable d'environement (MONGO)
-
-# Random secret token
-JWT_SECRET_TOKEN = xxx
 ````
 7. Lancer le server frontend avec 'ng serve'
 8. Lancer le server backend avec 'nodemon server'
