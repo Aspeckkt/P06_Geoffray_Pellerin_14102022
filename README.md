@@ -13,10 +13,10 @@ Une fois le projet installer, rendez-vous sur http://localhost:4200/
 ## Déploiement
 
 1. Cloner le repository
-2. Installer Node.js ( npm install node)
+2. Installer Node.js ( https://nodejs.org/en/ )
 3. Installer Angular CLI ( npm install @angular/cli )
-4. Installer Nodemon ( npm Install nodemon )
-5. Installer les dépendences pour les dossiers frontend et backend (npm install)
+4. Installer Nodemon ( npm install nodemon )
+5. Installer les dépendences pour les dossiers frontend et backend ( npm install )
 6. Mettre en place le fichier .env à la racine // Déjà déclarer dans app.js
 
 ````text
